@@ -1,0 +1,30 @@
+.electric-l-container {
+  width: 240px;
+  height: 240px;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.electric-l {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  overflow: visible;
+  filter: drop-shadow(0 0 8px #00ffff);
+}
+
+.electric-path {
+  stroke-dasharray: 12;
+  animation: electricFlow 0.6s linear infinite;
+  filter: drop-shadow(0 0 12px #00ffff);
+}
+
+/* Continuous electricity flow */
+@keyframes electricFlow {
+  to {
+    stroke-dashoffset: -24;
+  }
+}
