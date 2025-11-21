@@ -4,6 +4,7 @@
   position: relative;
   pointer-events: none;
 }
+
 @media (max-width: 768px) {
   .subscription-title {
     font-size: 2.5rem !important;

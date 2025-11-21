@@ -9,11 +9,20 @@ const CombinedPage: React.FC = () => {
 
   // 👇 State to handle authentication
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   // ✅ Callback to trigger after successful sign-in
   const handleSignInSuccess = () => {
     setIsAuthenticated(true);
-    
   };
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -29,30 +38,34 @@ const CombinedPage: React.FC = () => {
   }, []);
 
   const handleLogout = () => {
-  localStorage.clear();
-  setIsAuthenticated(false);
-  window.location.reload();
-};
+    localStorage.clear();
+    setIsAuthenticated(false);
+    window.location.reload();
+  };
 
   return (
     <div
       style={{
         width: "100%",
-        height: "100vh",
+        minHeight: "100vh",
         position: "relative",
-        overflow: "hidden",
+        overflowX: "hidden",
+        overflowY: "auto",
         backgroundColor: "black",
       }}
     >
       {/* ===== BACKGROUND (Subscription Page Visuals) ===== */}
       <div
+      className="laser-wrapper"
         style={{
-          width: "100%",
-          height: "100%",
-          position: "absolute",
+          position: "fixed",
           top: 0,
           left: 0,
+          width: "100%",
+          height: "100%",
           overflow: "hidden",
+          zIndex: 1,
+          pointerEvents: "none",
         }}
         onMouseMove={(e) => {
           const rect = e.currentTarget.getBoundingClientRect();
@@ -73,8 +86,8 @@ const CombinedPage: React.FC = () => {
         }}
       >
         <LaserFlow
-          horizontalBeamOffset={0.18}
-          verticalBeamOffset={0.22}
+          horizontalBeamOffset={isMobile ? 0.19 : 0.15}
+          verticalBeamOffset={isMobile ? 0.325 : 0.255}
           color="#f96565ff"
         />
 
@@ -82,47 +95,36 @@ const CombinedPage: React.FC = () => {
           ref={revealImgRef}
           src="./subscriptionbg.png"
           alt="Reveal effect"
-          style={
-            {
-              position: "absolute",
-              width: "100%",
-              height: "100%",
-              top: 0,
-              left: 0,
-              mixBlendMode: "lighten",
-              opacity: 0.8,
-              pointerEvents: "none",
-              WebkitMaskImage:
-                "radial-gradient(circle at var(--mx) var(--my), rgba(255,255,255,1) 0px, rgba(255,255,255,0.95) 60px, rgba(255,255,255,0.6) 120px, rgba(255,255,255,0.25) 180px, rgba(255,255,255,0) 240px)",
-              maskImage:
-                "radial-gradient(circle at var(--mx) var(--my), rgba(255,255,255,1) 0px, rgba(255,255,255,0.95) 60px, rgba(255,255,255,0.6) 120px, rgba(255,255,255,0.25) 180px, rgba(255,255,255,0) 240px)",
-              WebkitMaskRepeat: "no-repeat",
-              maskRepeat: "no-repeat",
-              // @ts-ignore
-              "--mx": "-999px",
-              // @ts-ignore
-              "--my": "-999px",
-            } as React.CSSProperties
-          }
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            mixBlendMode: "lighten",
+            opacity: 0.3,
+            pointerEvents: "none",
+            zIndex: 2,
+            WebkitMaskImage:
+              "radial-gradient(circle at var(--mx) var(--my), rgba(255,255,255,1) 0px, rgba(255,255,255,0.95) 60px, rgba(255,255,255,0.6) 120px, rgba(255,255,255,0.25) 180px, rgba(255,255,255,0) 240px)",
+            maskImage:
+              "radial-gradient(circle at var(--mx) var(--my), rgba(255,255,255,1) 0px, rgba(255,255,255,0.95) 60px, rgba(255,255,255,0.6) 120px, rgba(255,255,255,0.25) 180px, rgba(255,255,255,0) 240px)",
+          }}
         />
       </div>
 
       {/* ===== FOREGROUND TEXT (Subscription Title + Card) ===== */}
       <div
         style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
+          position: "relative",
+          zIndex: 3,
           width: "100%",
-          height: "100%",
-          zIndex: 5,
+          padding: "2rem 1rem",
           display: "flex",
           flexDirection: "column",
-          justifyContent: "center",
           alignItems: "center",
-          textAlign: "center",
-          padding: "2rem",
-          transition: "filter 1s ease",
+          gap: "2rem",
+          minHeight: "100vh",
           filter: isAuthenticated ? "none" : "blur(10px)",
           pointerEvents: isAuthenticated ? "auto" : "none",
         }}
@@ -145,7 +147,14 @@ const CombinedPage: React.FC = () => {
           </div>
         </GradientText>
 
-        <div>
+        <div
+          style={{
+            top: 0,
+            left: 0,
+            width: "100%",
+            zIndex: 5,
+          }}
+        >
           <SubscriptionCards />
           <button onClick={handleLogout}>Logout</button>
         </div>
@@ -169,8 +178,6 @@ const CombinedPage: React.FC = () => {
           }}
         >
           <SignIn onSuccess={handleSignInSuccess} />
-          
-
         </div>
       )}
     </div>

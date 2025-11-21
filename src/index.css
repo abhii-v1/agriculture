@@ -19,8 +19,54 @@ code {
     monospace;
 }
 
+
+
 @media (max-width: 768px) {
-  .subscription-title {
-    font-size: 2.5rem !important;
+  h1, h2, h3 {
+    line-height: 1.2 !important;
+    word-break: break-word;
+  }
+
+  h1 {
+    font-size: 4rem !important;
+  }
+
+  h2 {
+    font-size: 1.6rem !important;
+  }
+
+  h3 {
+    font-size: 1.2rem !important;
+  }
+
+  p, span, div, li {
+    font-size: 1.5rem !important;
+  }
+
+  .text-type {
+    font-size: 2rem !important;
+    white-space: normal !important;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 3.2svhrem !important;
+  }
+
+  h2 {
+    font-size: 1.4rem !important;
+  }
+
+  h3 {
+    font-size: 1.1rem !important;
+  }
+
+  p, span, div, li {
+    font-size: 0.90rem !important;
+  }
+
+  .text-type {
+    font-size: 0.9rem !important;
   }
 }

@@ -12,3 +12,20 @@
 .text-type__cursor--hidden {
   display: none;
 }
+/* ======================
+   MOBILE RESPONSIVE TEXT
+   ====================== */
+@media (max-width: 480px) {
+  .text-type {
+    font-size: 1rem;           /* Comfortable readable size */
+    line-height: 1.45;         /* More breathing space */
+    letter-spacing: 0.3px;     /* Slightly spaced for readability */
+    word-break: break-word;    /* Prevent overflow */
+  }
+
+  .text-type__cursor {
+    margin-left: 0.15rem;
+    width: 10px;
+    height: 1.2em;             /* Match text height */
+  }
+}
