@@ -1,47 +1,91 @@
 import React from "react";
-import { Star } from "lucide-react";
+import "./Subscription.css";
+import { useNavigate } from "react-router-dom"; // ✅ Import navigation hook
 
-const SubscriptionCard: React.FC = () => {
+interface Plan {
+  title: string;
+  price: string;
+  details: string;
+  features: string[];
+  popular?: boolean;
+}
+
+const plans: Plan[] = [
+  {
+    title: "Plan",
+    price: "Free",
+    details: "Limited time deals",
+    features: ["1 deals per day", "2 order tracing per day", "slow delivery"],
+  },
+  {
+    title: "Popular",
+    price: "2000",
+    details: "First popular choice of Distributor and consumers",
+    features: [
+      "10 times deal per day",
+      "20 order tracing per day",
+      "Faster delivery",
+      "Quick Response",
+      "2 x 10 customer support",
+    ],
+    popular: true,
+  },
+  {
+    title: "Business",
+    price: "50000",
+    details: "Product details for Product Type 3",
+    features: [
+      "Unlimited deals per day",
+      "Unlimited order tracing",
+      "Fastest delivery ever seen",
+      "Developer will reach out",
+      "CEO customer support",
+    ],
+  },
+];
+
+const SubscriptionCards: React.FC = () => {
+  const navigate = useNavigate(); // ✅ Initialize navigate
+
+  // ✅ Handle click for different plans
+  const handleOrderClick = (planTitle: string) => {
+    if (planTitle === "Plan") {
+      // Free plan → Go to homepage
+      navigate("/homePage");
+    } else {
+      // Other plans → Just alert
+      alert(`You have clicked on the ${planTitle} plan.`);
+    }
+  };
+
   return (
-    <div className="w-80 bg-gradient-to-b from-[#203030] to-[#0a0f15] rounded-2xl shadow-xl text-white p-6 relative overflow-hidden border border-[#2c3e50]">
-      {/* Glow background */}
-      <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-green-400/10 to-transparent pointer-events-none"></div>
+    <div className="subscription-container">
+      {plans.map((plan, idx) => (
+        <div key={idx} className={`card ${plan.popular ? "popular" : ""}`}>
+          {plan.popular && <div className="badge">Most popular</div>}
+          <h3>{plan.title}</h3>
+          <p className="details">{plan.details}</p>cd
+          <h2 className="price">
+            ₹ {plan.price} <span>/ lifetime</span>
+          </h2>
 
-      {/* Header */}
-      <div className="flex items-center space-x-2 mb-4">
-        <div className="bg-green-400/20 p-2 rounded-full">
-          <Star className="text-green-400 w-5 h-5" />
+          {/* ✅ Click handler added */}
+          <button
+            className={`order-btn ${plan.popular ? "highlight" : ""}`}
+            onClick={() => handleOrderClick(plan.title)}
+          >
+            Order Now
+          </button>
+
+          <ul className="features">
+            {plan.features.map((feature, i) => (
+              <li key={i}>✓ {feature}</li>
+            ))}
+          </ul>
         </div>
-        <h2 className="text-lg font-semibold">Premium Plan</h2>
-      </div>
-
-      {/* Price */}
-      <div className="text-5xl font-bold mb-2 tracking-wide">49.99<span className="text-3xl">$</span></div>
-
-      <div className="border-t border-gray-600/40 my-4"></div>
-
-      {/* Features */}
-      <ul className="space-y-3 text-gray-200">
-        <li className="flex items-center space-x-2">
-          <span className="text-green-400">➤</span>
-          <span>Unlock 90% of site’s content</span>
-        </li>
-        <li className="flex items-center space-x-2">
-          <span className="text-green-400">➤</span>
-          <span>Delve into in-depth analyses</span>
-        </li>
-        <li className="flex items-center space-x-2">
-          <span className="text-green-400">➤</span>
-          <span>Explore thought provoking features</span>
-        </li>
-      </ul>
-
-      {/* Button */}
-      <button className="mt-8 w-full bg-white text-black font-semibold py-3 rounded-lg hover:bg-gray-200 transition-all">
-        Buy now to get access
-      </button>
+      ))}
     </div>
   );
 };
 
-export default SubscriptionCard;
+export default SubscriptionCards;

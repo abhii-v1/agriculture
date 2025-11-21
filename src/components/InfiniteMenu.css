@@ -39,8 +39,8 @@
 .action-button-icon {
   user-select: none;
   position: relative;
-  color: #fb0404ef;
-  top: -50px;
+  color: #dc0b70ef;
+  top: -10px;
   font-size: 46px;
   
 }
@@ -98,7 +98,7 @@
   transform: translateX(-50%) scale(1);
   opacity: 1;
   pointer-events: auto;
-  transition: 0.5s ease;
+  transition: 0.9s ease;
 }
 
 .action-button.inactive {
@@ -106,5 +106,5 @@
   transform: translateX(-50%) scale(0);
   opacity: 0;
   pointer-events: none;
-  transition: 0.1s ease;
+  transition: 0.9s ease;
 }

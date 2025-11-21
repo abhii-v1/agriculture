@@ -19,6 +19,18 @@ import StarBorder from "../components/StarBorder";
 import ChromaGrid from "../components/ChromaGrid";
 import InfiniteMenu from "../components/InfiniteMenu";
 import ElectricLineSVG from "../components/ElectricLineSVG";
+import { Link  } from "react-router-dom";
+
+import {
+  Facebook,
+  Twitter,
+  Instagram,
+  Linkedin,
+  Phone,
+  Mail,
+  MapPin,
+} from "lucide-react";
+// import { useNavigate } from "react-router-dom";
 
 // import { createBrowserRouter } from "react-router-dom";
 // import HomePage from "./components/HomePage";
@@ -78,25 +90,23 @@ const items2 = [
 const services = [
   {
     image: "./direct_buy.jpeg",
-    link: "https://google.com/",
     title: "BUY from FARMER",
     description: "Buy your favorite vegetables and food , directly from farmer",
   },
   {
     image: "./buying.jpeg",
-    link: "https://google.com/",
+
     title: "BUY from DISTRIBUTOR",
     description: "Buy your favaroite vegetables and fruits from distributor",
   },
   {
     image: "./selling.png",
-    link: "https://google.com/",
+
     title: "SELL to DISTRIBUTOR ",
     description: "Sell you vegetables or fruit to distributor!",
   },
   {
     image: "./track.jpeg",
-    link: "https://google.com/",
     title: "TRACK the DEAL",
     description: "Track the deals using transaction id and QR code",
   },
@@ -106,9 +116,7 @@ const Adpage: React.FC = () => {
   const [hidden, setHidden] = useState(false);
   const scrollTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [qrHovered, setQrHovered] = useState(false);
-
-
-
+  
 
   useEffect(() => {
     const handleScroll = () => {
@@ -177,7 +185,8 @@ const Adpage: React.FC = () => {
         width: "100%",
         backgroundColor: "black",
         position: "relative",
-        minHeight: "100vh",
+        minHeight: "120vh",
+        overflowX: "hidden",
       }}
     >
       {/* ===== Prism fixed background ===== */}
@@ -196,7 +205,7 @@ const Adpage: React.FC = () => {
           baseWidth={5.5}
           scale={3.6}
           hueShift={0}
-          colorFrequency={1}
+          colorFrequency={5}
           noise={0.1}
           glow={0.4}
         />
@@ -257,33 +266,38 @@ const Adpage: React.FC = () => {
             padding: "2rem",
           }}
         >
-
-            {/* Fixed header/nav */}
-            <div
-              style={{
-                position: "fixed",
-                top: 0,
-                left: 0,
-                width: "100%",
-                zIndex: 1000,
-                display: "flex",
-                justifyContent: "flex-start",
-              }}
-            >
-              <CardNav
-                logoAlt="Company Logo"
-                items={items}
-                baseColor="rgba(235, 222, 222, 0.05)"
-                menuColor="#0e0c0cff"
-                buttonBgColor="#111"
-                buttonTextColor="#fff"
-                ease="power3.out"
-              />
-
+          {/* Fixed header/nav */}
+          <div
+            style={{
+              position: "fixed",
+              top: 0,
+              left: 0,
+              width: "100%",
+              zIndex: 1000,
+              display: "flex",
+              justifyContent: "flex-start",
+            }}
+          >
+            <CardNav
               
-            </div>
+              items={items}
+              baseColor="rgba(235, 222, 222, 0.05)"
+              menuColor="#0e0c0cff"
+              buttonBgColor="#111"
+              buttonTextColor="#fff"
+              ease="power3.out"
+              showSearch={true}
+              onSearch={(query) => console.log("Search for:", query)}
+              navButtons={[
+                {
+                  label: "Get Started",
+                  href: "/Subscription",
+                  bgColor: "#151414ff",
+                },
+              ]}
+            />
+          </div>
 
-      
           {/* Hero Section */}
           <GradientText
             colors={[
@@ -316,7 +330,6 @@ const Adpage: React.FC = () => {
             />
           </div>
         </section>
-
         {/* Content sections */}
         <section
           style={{
@@ -390,7 +403,6 @@ const Adpage: React.FC = () => {
             </StarBorder>
           </div>
         </section>
-
         <section
           style={{
             height: "100vh",
@@ -528,14 +540,12 @@ const Adpage: React.FC = () => {
 
             {/* Boxes */}
             {[
-              { pos: "top", 
-                text: "SCAN IT AND GET ALL DETAIL OF DEAL" },
+              { pos: "top", text: "SCAN IT AND GET ALL DETAIL OF DEAL" },
               {
                 pos: "bottom",
                 text: "FOR EACH DEAL YOU GET A UNIQUE QR CODE TO SCAN",
               },
-              { pos: "left", 
-                text: "YOU CAN SEE THE ORIGIN OF TRANSATION" },
+              { pos: "left", text: "YOU CAN SEE THE ORIGIN OF TRANSATION" },
               {
                 pos: "right",
                 text: "YOU CAN SEE ALL TYPE OF INFORMATION TO BUILD TRUST",
@@ -629,7 +639,6 @@ const Adpage: React.FC = () => {
             )}
           </div>
         </section>
-
         {/* Extra content */}
         <section
           style={{
@@ -651,7 +660,7 @@ const Adpage: React.FC = () => {
             >
               Technologies
             </h2>
-            
+
             {/* <LogoLoop
               logos={techLogos}
               speed={20}
@@ -666,34 +675,199 @@ const Adpage: React.FC = () => {
             /> */}
           </div>
         </section>
-        <div
+        <section
           style={{
-            height: "50vh",
+            width: "100%",
+            backgroundColor: "#0b1120",
             display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
             justifyContent: "center",
-            borderTop: "10px solid blue",
+            alignItems: "center",
+            padding: "0",
+            margin: "0",
           }}
         >
-          <div
-            style={{
-              width: "100%",
-              height: "100%",
-              backgroundColor: "black",
-              padding: "2rem",
-              color: "white", // For text content
-            }}
-          >
-            {/* Add your content here */}
-            <h2 style={{ textAlign: "center", width: "100%" }}>
-              --------Your Content--------
-            </h2>
-            <p style={{ textAlign: "center", width: "100%", color: "red" }}>
-              All rights are reserved by Murmur
-            </p>
-          </div>
-        </div>
+          <footer className="bg-gradient-to-b from-[#0b1120] to-[#0f172a] text-white border-t border-pink-8000">
+            <div className="max-w-9xl mx-auto px-6 sm:px-10 lg:px-16 py-14">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
+                {/* --- Brand Section --- */}
+                <div>
+                  <div className="flex items-center space-x-3 mb-5">
+
+                    <span className="text-2xl font-extrabold tracking-tight">
+                      AGRICULTURE - SYSTEM
+                    </span>
+                  </div>
+                  <p className="text-gray-400 text-sm leading-relaxed mb-6">
+                    Your trusted partner for any small to big deals
+                  </p>
+
+                  {/* --- Social Links --- */}
+                  <div className="flex space-x-4">
+                    <a
+                      href="https://facebook.com"
+                      aria-label="Visit our Facebook"
+                      className="p-2 bg-gray-800 rounded-full hover:bg-[#3b82f6] transition-colors"
+                    >
+                      <Facebook className="h-4 w-4" />
+                    </a>
+                    <a
+                      href="https://twitter.com"
+                      aria-label="Visit our Twitter"
+                      className="p-2 bg-gray-800 rounded-full hover:bg-[#1DA1F2] transition-colors"
+                    >
+                      <Twitter className="h-4 w-4" />
+                    </a>
+                    <a
+                      href="https://instagram.com"
+                      aria-label="Visit our Instagram"
+                      className="p-2 bg-gray-800 rounded-full hover:bg-[#E1306C] transition-colors"
+                    >
+                      <Instagram className="h-4 w-4" />
+                    </a>
+                    <a
+                      href="https://www.linkedin.com/in/abhiman-b8145a37a"
+                      aria-label="Visit my LinkedIn profile"
+                      className="p-2 bg-gray-800 rounded-full hover:bg-[#0077B5] transition-colors"
+                    >
+                      <Linkedin className="h-4 w-4" />
+                    </a>
+                  </div>
+                </div>
+
+                {/* --- Services --- */}
+                <div>
+                  <h3 className="text-lg font-semibold mb-4 text-white">
+                    Services
+                  </h3>
+                  <ul className="space-y-2 text-gray-400 text-sm">
+                    <li>
+                      <Link
+                        to="/services/plumbing"
+                        className="hover:text-white transition-colors"
+                      >
+                        Track deals
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        to="/services/electrical"
+                        className="hover:text-white transition-colors"
+                      >
+                        Distributors
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        to="/services/appliance-repair"
+                        className="hover:text-white transition-colors"
+                      >
+                        Farmer
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        to="/services/carpentry"
+                        className="hover:text-white transition-colors"
+                      >
+                        Consumer
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+
+                {/* --- Company --- */}
+                <div>
+                  <h3 className="text-lg font-semibold mb-4 text-white">
+                    Company
+                  </h3>
+                  <ul className="space-y-2 text-gray-400 text-sm">
+                    <li>
+                      <Link
+                        to="/about"
+                        className="hover:text-white transition-colors"
+                      >
+                        About Us
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        to="/careers"
+                        className="hover:text-white transition-colors"
+                      >
+                        Careers
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        to="/blog"
+                        className="hover:text-white transition-colors"
+                      >
+                        Blog
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        to="/privacy-policy"
+                        className="hover:text-white transition-colors"
+                      >
+                        Privacy Policy
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        to="/terms"
+                        className="hover:text-white transition-colors"
+                      >
+                        Terms & Conditions
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+
+                {/* --- Contact --- */}
+                <div>
+                  <h3 className="text-lg font-semibold mb-4 text-white">
+                    Contact
+                  </h3>
+                  <ul className="space-y-3 text-gray-400 text-sm">
+                    <li className="flex items-center space-x-2">
+                      <Phone className="h-4 w-4 flex-shrink-0 text-[#3b82f6]" />
+                      <span>+91 xxx xxx xx9</span>
+                    </li>
+                    <li className="flex items-center space-x-2">
+                      <Mail className="h-4 w-4 flex-shrink-0 text-[#3b82f6]" />
+                      <a
+                        href="mailto:support@nexsyn.com"
+                        className="hover:text-white transition-colors"
+                      >
+                        support@agriculture.com
+                      </a>
+                    </li>
+                    <li className="flex items-center space-x-2">
+                      <MapPin className="h-4 w-4 flex-shrink-0 text-[#3b82f6]" />
+                      <span>unknown, China</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* --- Divider + Bottom note --- */}
+              <div className="mt-12 border-t border-gray-800 pt-6 text-center text-gray-500 text-sm">
+                <p>
+                  © {new Date().getFullYear()}{" "}
+                  <span className="text-white font-semibold">
+                    Agri - Culture
+                  </span>
+                  . All rights reserved for you ❤️
+                </p>
+                <p className="mt-2 text-xs text-gray-600">
+                  Built with ❤️ by{" "}
+                  <span className="text-white font-semibold">Abhiman</span>
+                </p>
+              </div>
+            </div>
+          </footer>
+        </section>
       </main>
     </div>
   );
