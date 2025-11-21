@@ -18,34 +18,8 @@ Use this app as a starting point for modern, visually appealing UI-driven projec
 ✔ Clean folder structure
 ✔ Easily deployable to Vercel, Netlify, or GitHub Pages
 
-📁 Folder Structure
-my-app/
-│
-├── public/
-│   ├── index.html
-│   ├── subscriptionbg.png
-│   └── favicon.ico
-│
-├── src/
-│   ├── components/
-│   │   ├── LoginPage/
-│   │   │   └── SignIn.tsx
-│   │   ├── SubscriptionCard/
-│   │   │   └── index.tsx
-│   │   ├── GradientText.tsx
-│   │   ├── LaserFlow.tsx
-│   │   └── ...your components
-│   │
-│   ├── pages/
-│   │   └── CombinedPage.tsx
-│   │
-│   ├── App.tsx
-│   ├── index.tsx
-│   ├── Subscription.css
-│   └── ...other files
-│
-├── package.json
-└── README.md
+
+
 
 🛠 Available Scripts
 ▶️ npm start
@@ -88,12 +62,6 @@ Output directory: build/
 
 Done 🎉
 
-📸 Screenshots
-
-(Add your own screenshot images here)
-
-![Home Page](./screenshots/home.png)
-![Subscription Page](./screenshots/subscriptions.png)
 
 🤝 Contributing
 
@@ -112,7 +80,7 @@ Open a Pull Request
 This project is licensed under your preferred license (MIT recommended).
 You can add:
 
-MIT License © 2025 Your Name
+MIT License © 2025 Abhiman 
 
 💬 Support
 
